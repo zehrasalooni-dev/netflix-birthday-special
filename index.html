@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday, Madhup</title>
+    <meta
+      name="description"
+      content="A premium Netflix-inspired birthday surprise for Madhup"
+    />
+    <style>
+      :root {
+        --bg: #0a0a0a;
+        --bg2: #141414;
+        --panel: rgba(20, 20, 20, 0.82);
+        --panel-strong: rgba(28, 28, 28, 0.96);
+        --text: #f5f5f5;
+        --muted: #d0d0d0;
+        --line: rgba(255, 255, 255, 0.09);
+        --red: #e50914;
+        --red-soft: #ff2a3d;
+        --gold: #f8d27d;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+        user-select: none;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(circle at top, rgba(229, 9, 20, 0.18), transparent 35%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .page {
+        position: relative;
+        z-index: 1;
+      }
+
+      .netflix-header {
+        position: relative;
+        min-height: 86vh;
+        display: flex;
+        align-items: flex-end;
+        padding: 28px clamp(18px, 5vw, 60px);
+        background:
+          linear-gradient(90deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.52) 38%, rgba(0, 0, 0, 0.05) 100%),
+          linear-gradient(180deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.82) 100%),
+          url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+      }
+
+      .brand {
+        position: absolute;
+        top: 28px;
+        left: clamp(20px, 5vw, 60px);
+        font-size: clamp(1.7rem, 2vw, 2.6rem);
+        font-weight: 900;
+        letter-spacing: 2px;
+        color: var(--red);
+      }
+
+      .hero-content {
+        max-width: 760px;
+      }
+
+      .badge {
+        display: inline-block;
+        margin-bottom: 18px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        color: var(--gold);
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .title {
+        font-size: clamp(2.5rem, 6vw, 5.4rem);
+        line-height: 0.95;
+        letter-spacing: -0.06em;
+        font-weight: 900;
+        margin-bottom: 18px;
+        text-transform: uppercase;
+        color: #fff;
+        text-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      }
+
+      .title .accent {
+        color: var(--red-soft);
+      }
+
+      .subtitle {
+        max-width: 680px;
+        color: var(--muted);
+        font-size: clamp(1rem, 1.4vw, 1.2rem);
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+
+      .cta-row {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 8px;
+        padding: 13px 26px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        opacity: 0.95;
+      }
+
+      .btn.primary {
+        background: #fff;
+        color: #111;
+      }
+
+      .btn.secondary {
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .music-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        padding: 18px clamp(18px, 5vw, 60px);
+        background: linear-gradient(180deg, rgba(17, 17, 17, 0.95), rgba(20, 20, 20, 0.98));
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .music-label {
+        color: #f2f2f2;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+
+      .music-bar audio {
+        width: min(100%, 560px);
+      }
+
+      section {
+        padding: 36px clamp(18px, 5vw, 60px) 26px;
+      }
+
+      .section-header {
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .section-header h2 {
+        font-size: clamp(1.6rem, 2vw, 2.5rem);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      .section-header span {
+        color: var(--gold);
+        font-size: 0.92rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .reel-box {
+        width: min(92%, 520px);
+        margin: 0 auto;
+        height: 480px;
+        overflow-y: auto;
+        background: rgba(0, 0, 0, 0.75);
+        border: 2px solid rgba(229, 9, 20, 0.7);
+        border-radius: 18px;
+        box-shadow: 0 0 28px rgba(229, 9, 20, 0.25);
+        scroll-behavior: smooth;
+      }
+
+      .reel-box::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .reel-box::-webkit-scrollbar-thumb {
+        background: rgba(229, 9, 20, 0.8);
+        border-radius: 10px;
+      }
+
+      .reel-item {
+        padding: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      }
+
+      .reel-item:last-child {
+        border-bottom: none;
+      }
+
+      .reel-item img {
+        width: 100%;
+        height: 260px;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+
+      .reel-item p {
+        padding-top: 10px;
+        text-align: center;
+        color: #dedede;
+        line-height: 1.6;
+      }
+
+      .cards-row {
+        display: flex;
+        gap: 18px;
+        overflow-x: auto;
+        padding-bottom: 12px;
+        scroll-snap-type: x proximity;
+      }
+
+      .cards-row::-webkit-scrollbar {
+        display: none;
+      }
+
+      .mini-card {
+        flex: 0 0 280px;
+        background: rgba(28, 28, 28, 0.92);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 18px 35px rgba(0, 0, 0, 0.22);
+        scroll-snap-align: start;
+        transition: transform 0.25s ease;
+      }
+
+      .mini-card:hover {
+        transform: translateY(-4px);
+      }
+
+      .mini-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+
+      .mini-card-content {
+        padding: 14px 14px 18px;
+      }
+
+      .mini-card-content h3 {
+        color: var(--red-soft);
+        font-size: 1.06rem;
+        margin-bottom: 8px;
+      }
+
+      .mini-card-content p {
+        color: #d0d0d0;
+        line-height: 1.55;
+        font-size: 0.9rem;
+      }
+
+      .letters {
+        display: grid;
+        gap: 16px;
+      }
+
+      .letter {
+        background: linear-gradient(180deg, rgba(30, 30, 30, 0.94), rgba(17, 17, 17, 0.94));
+        border-left: 4px solid var(--red);
+        border-radius: 12px;
+        padding: 22px 24px;
+        color: #f0f0f0;
+        line-height: 1.8;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+      }
+
+      .letter strong {
+        display: block;
+        font-size: 1.02rem;
+        margin-bottom: 8px;
+        color: var(--gold);
+      }
+
+      .surprise-wrap {
+        background: rgba(23, 23, 23, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 24px;
+        padding: 26px 18px 20px;
+        text-align: center;
+      }
+
+      .surprise-wrap h3 {
+        font-size: clamp(1.8rem, 2.2vw, 2.8rem);
+        font-weight: 800;
+        margin-bottom: 12px;
+      }
+
+      .surprise-wrap p {
+        color: #d5d5d5;
+        margin-bottom: 18px;
+      }
+
+      .scratch-area {
+        position: relative;
+        width: min(100%, 320px);
+        height: 320px;
+        margin: 0 auto;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 0 30px rgba(229, 9, 20, 0.28);
+      }
+
+      .scratch-cover {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(180deg, #222, #141414);
+        text-align: center;
+        padding: 18px;
+        z-index: 1;
+      }
+
+      .scratch-cover img {
+        width: 135px;
+        height: 135px;
+        margin-bottom: 12px;
+      }
+
+      .scratch-cover h4 {
+        color: var(--red-soft);
+        font-size: 1.38rem;
+        line-height: 1.3;
+        margin-bottom: 8px;
+      }
+
+      .scratch-cover p {
+        margin: 0;
+        color: #d3d3d3;
+        font-size: 0.82rem;
+      }
+
+      canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        z-index: 2;
+        cursor: pointer;
+      }
+
+      .footer-note {
+        text-align: center;
+        padding: 30px 16px 50px;
+        color: #d5d5d5;
+        font-size: 0.92rem;
+        letter-spacing: 0.04em;
+      }
+
+      @media (max-width: 600px) {
+        .netflix-header {
+          min-height: 68vh;
+        }
+
+        .badge {
+          letter-spacing: 0.08em;
+        }
+
+        .reel-box {
+          width: 100%;
+          height: 420px;
+        }
+
+        .mini-card {
+          flex-basis: 240px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="netflix-header">
+        <div class="brand">NETFLIX</div>
+
+        <div class="hero-content">
+          <div class="badge">Special Birthday Edition</div>
+          <h1 class="title">Happy Birthday <span class="accent">Madhup</span></h1>
+          <p class="subtitle">
+            Every day with you feels like a scene from a perfect love story. A million smiles,
+            a thousand memories, and one forever kind of feeling — this is your celebration, your moment,
+            your magic. Happy Birthday, my love.
+          </p>
+
+          <div class="cta-row">
+            <button class="btn primary" onclick="startShow()">▶ Play Love Story</button>
+            <button class="btn secondary" onclick="scrollToSurprise()">✨ Reveal Surprise</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="music-bar">
+        <span class="music-label">🎵 Birthday Background Music</span>
+        <audio id="bgAudio" controls loop>
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+          Your browser does not support audio playback.
+        </audio>
+      </div>
+
+      <section>
+        <div class="section-header">
+          <h2>Romantic Memories</h2>
+          <span>Season 01</span>
+        </div>
+
+        <div class="reel-box" id="memoryReel">
+          <div class="reel-item">
+            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="Memory 1" />
+            <p>Every beautiful moment with you feels like a movie worth rewatching forever.</p>
+          </div>
+          <div class="reel-item">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" alt="Memory 2" />
+            <p>Your smile is my favorite scene, and your laughter is my favorite soundtrack.</p>
+          </div>
+          <div class="reel-item">
+            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80" alt="Memory 3" />
+            <p>From endless chats to unforgettable memories, my favorite chapter is still us.</p>
+          </div>
+          <div class="reel-item">
+            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80" alt="Memory 4" />
+            <p>There is nowhere else I’d rather be than in your heart, in your world, in your love.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-header">
+          <h2>Favorite Moments</h2>
+          <span>Our Story</span>
+        </div>
+
+        <div class="cards-row">
+          <article class="mini-card">
+            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80" alt="Late night call" />
+            <div class="mini-card-content">
+              <h3>Late Night Talks</h3>
+              <p>Those quiet, endless conversations where time just disappeared and only us remained.</p>
+            </div>
+          </article>
+
+          <article class="mini-card">
+            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" alt="Food date" />
+            <div class="mini-card-content">
+              <h3>Special Dates</h3>
+              <p>Even the smallest plans feel magical when they are shared with you.</p>
+            </div>
+          </article>
+
+          <article class="mini-card">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" alt="Funny moments" />
+            <div class="mini-card-content">
+              <h3>Fun & Laughter</h3>
+              <p>Your playful side and that smile have always made my world brighter.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-header">
+          <h2>Love Notes</h2>
+          <span>From My Heart</span>
+        </div>
+
+        <div class="letters">
+          <div class="letter">
+            <strong>Dear Madhup,</strong>
+            You are the kind of happiness that makes everything feel softer, brighter, and more meaningful. With you,
+            life feels like it finally found its rhythm. You are my peace, my joy, and my favorite part of every day.
+          </div>
+
+          <div class="letter">
+            <strong>For Your Birthday,</strong>
+            I want to celebrate the beautiful soul that you are. The way you care, the way you love, the way you make my
+            world feel complete — all of it is pure magic. I hope this year brings you even more smiles, more dreams,
+            and more reasons to feel adored.
+          </div>
+
+          <div class="letter">
+            <strong>Always & Forever,</strong>
+            There are no perfect words for how much you mean to me, but I know this much: I am grateful every single day
+            that you are in my life. You are my favorite person, my greatest blessing, and the love I never want to lose.
+          </div>
+        </div>
+      </section>
+
+      <section id="surpriseSection">
+        <div class="surprise-wrap">
+          <h3>🎉 Scratch to Reveal Your Gift</h3>
+          <p>Reveal the birthday surprise hidden behind the layer.</p>
+
+          <div class="scratch-area">
+            <div class="scratch-cover">
+              <img src="https://cdn-icons-png.flaticon.com/512/3132/3132693.png" alt="Birthday cake" />
+              <h4>Happy Birthday, Madhup!</h4>
+              <p>May your year be full of love, laughter, and endless reasons to smile.</p>
+            </div>
+            <canvas id="scratchCanvas" width="320" height="320"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-note">Made with all my love, just for you, Madhup ❤️</div>
+    </div>
+
+    <script>
+      function startShow() {
+        const audio = document.getElementById("bgAudio");
+        if (audio) {
+          audio.play().catch(() => {});
+        }
+
+        const reel = document.getElementById("memoryReel");
+        if (!reel) return;
+
+        const tick = () => {
+          if (reel.scrollTop + reel.clientHeight >= reel.scrollHeight) {
+            reel.scrollTop = 0;
+          } else {
+            reel.scrollTop += 1;
+          }
+        };
+
+        if (window.__reelTimer) clearInterval(window.__reelTimer);
+        window.__reelTimer = setInterval(tick, 30);
+      }
+
+      function scrollToSurprise() {
+        document.getElementById("surpriseSection").scrollIntoView({ behavior: "smooth" });
+      }
+
+      document.addEventListener("click", (event) => {
+        if (event.target.tagName === "BUTTON" || event.target.tagName === "AUDIO" || event.target.tagName === "CANVAS") {
+          return;
+        }
+
+        const kiss = document.createElement("div");
+        kiss.textContent = "💋";
+        kiss.style.position = "fixed";
+        kiss.style.left = `${event.clientX - 18}px`;
+        kiss.style.top = `${event.clientY - 18}px`;
+        kiss.style.fontSize = "2.3rem";
+        kiss.style.pointerEvents = "none";
+        kiss.style.zIndex = "9999";
+        kiss.style.animation = "floatUp 1.8s ease-out forwards";
+
+        const style = document.createElement("style");
+        style.textContent = "@keyframes floatUp { 0% { opacity: 1; transform: scale(0.7) translateY(0);} 50% { opacity: 0.9; transform: scale(1.25) translateY(-50px);} 100% { opacity: 0; transform: scale(1.6) translateY(-120px);} }";
+        document.head.appendChild(style);
+
+        document.body.appendChild(kiss);
+        setTimeout(() => kiss.remove(), 1800);
+        setTimeout(() => style.remove(), 1800);
+      });
+
+      const canvas = document.getElementById("scratchCanvas");
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#7a7a7a";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = "bold 17px Arial";
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#ffffff";
+      ctx.fillText("Scratch here 💖", canvas.width / 2, canvas.height / 2);
+
+      let scratching = false;
+
+      function scratchAt(event) {
+        if (!scratching) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = (event.clientX || (event.touches && event.touches[0].clientX)) - rect.left;
+        const y = (event.clientY || (event.touches && event.touches[0].clientY)) - rect.top;
+
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.beginPath();
+        ctx.arc(x, y, 20, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalCompositeOperation = "source-over";
+      }
+
+      canvas.addEventListener("mousedown", () => {
+        scratching = true;
+      });
+      canvas.addEventListener("mouseup", () => {
+        scratching = false;
+      });
+      canvas.addEventListener("mousemove", scratchAt);
+
+      canvas.addEventListener("touchstart", (e) => {
+        scratching = true;
+        scratchAt(e.touches[0]);
+      });
+      canvas.addEventListener("touchend", () => {
+        scratching = false;
+      });
+      canvas.addEventListener("touchmove", (e) => {
+        scratchAt(e.touches[0]);
+      });
+    </script>
+  </body>
+</html>
